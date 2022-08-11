@@ -36,7 +36,7 @@ date
 <p>Пример:<p>
 <code>
     $mails = $mailViewer->find([
-        'text' => 'текст_поиска',
-        'date' => 'дата_поиска'
+        'text' => 'test',
+        'date' => '2022-08-11'
     ]);
 </code>
