@@ -21,7 +21,7 @@ class MailViewer
     /**
      * @param $options параметры, для поиска в методе params
      */
-    public function getMessages(array $options = [])
+    public function getMessages(array $options = []) : MailViewer
     {
         $newOptions = $this->params($options);
         $this->emails = $this->searchMessages($newOptions);
@@ -32,7 +32,7 @@ class MailViewer
     /**
      * @param $options Принимает ассоц. массив для поиска по тексту и дате
      */
-    public function params(array $options) : string
+    protected function params(array $options) : string
     {
         $text = $date = $newOptions = "";
 
@@ -54,7 +54,7 @@ class MailViewer
         return $newOptions;
     }
 
-    public function searchMessages(string $newOptions)
+    protected function searchMessages(string $newOptions) : array | false
     {
         // Иногда возникает ошибка при подключении к почте, поэтому пробуем пару раз с небольшим интервалом
         $iterations = 0;
@@ -75,7 +75,7 @@ class MailViewer
         return $emails;
     }
 
-    public function output()
+    public function output() : array | string
     {
         foreach ($this->emails as $mail) {
             $headerInfo = imap_headerinfo($this->inbox, $mail);
